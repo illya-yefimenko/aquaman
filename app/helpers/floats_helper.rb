@@ -1,0 +1,2 @@
+module FloatsHelper
+end
