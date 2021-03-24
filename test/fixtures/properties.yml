@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  unit: MyString
+  type: 1
+  io_direction: 1
+
+two:
+  name: MyString
+  unit: MyString
+  type: 1
+  io_direction: 1
