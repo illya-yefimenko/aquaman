@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root "devices#index"
+
   resources :devices do
     resources :properties
   end
