@@ -10,8 +10,10 @@ class Property
   belongs_to :device
   
   TYPES = ['number','boolean']
-  
+  IO_DIRECTIONS = ['INPUT','OUTPUT']
+
   validates :name, presence: true
   validates :unit, presence: true
   validates :type, inclusion: { in: TYPES }
+  validates :io_direction, inclusion: { in: IO_DIRECTIONS }
 end
