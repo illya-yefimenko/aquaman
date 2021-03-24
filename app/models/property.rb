@@ -1,19 +1,19 @@
-# class Property
-#   include Mongoid::Document
-#   include Mongoid::Timestamps
-#
-#   field :name, type: String
-#   field :unit, type: String
-#   field :type, type: Integer
-#   field :io_direction, type: Integer
-#
-#   enum type: [:number, :boolean]
-#   enum io_direction: [:input, :output]
-#
-#   validates :name, presence: true
-#   validates :unit, presence: true
-#   validates :type, inclusion: { in: types.keys }
-#   validates :io_direction, inclusion: { in: io_directions.keys }
-#
-#   belongs_to :device
-# end
+class Property
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
+  field :name, type: String
+    validates :name, presence: true
+  field :unit, type: String
+    validates :unit, presence: true
+
+  field :value_type
+    VALUE_TYPES = [:number, :boolean]
+    validates :value_type, inclusion: { in: VALUE_TYPES }
+
+  field :io_direction
+    IO_DIRECTIONS = [:input, :output]
+    validates :io_direction, inclusion: {in: IO_DIRECTIONS }
+
+  belongs_to :device
+end
