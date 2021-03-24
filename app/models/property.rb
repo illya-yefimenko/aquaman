@@ -8,12 +8,12 @@ class Property
   field :io_direction, type: Integer
   
   belongs_to :device
-  
-  TYPES = ['number','boolean']
-  IO_DIRECTIONS = ['INPUT','OUTPUT']
+
+  enum type: [:number, :boolean]
+  enum io_direction: [:input, :output]
 
   validates :name, presence: true
   validates :unit, presence: true
-  validates :type, inclusion: { in: TYPES }
-  validates :io_direction, inclusion: { in: IO_DIRECTIONS }
+  validates :type, inclusion: { in: types.keys }
+  validates :io_direction, inclusion: { in: io_directions.keys }
 end
