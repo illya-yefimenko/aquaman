@@ -1,0 +1,21 @@
+<%= form_with model: [ @device, @device.properties.build ] do |form| %>
+  <p>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.label :unit %>
+    <%= form.text_field :unit %>
+  </p>
+  <p>
+    <%= form.label :value_type %>
+    <%= form.select :value_type, Property.getValueTypes, selected: Property.getValueTypes[0]  %>
+  </p>
+  <p>
+    <%= form.label :io_direction %>
+    <%= form.select :io_direction, Property.getIODirections, selected: Property.getIODirections[0]  %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
