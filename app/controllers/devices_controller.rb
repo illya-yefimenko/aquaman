@@ -5,7 +5,7 @@ class DevicesController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: {
-        device_id:@device.id.__id__,
+        device_id: @device.id.to_s,
         properties: properties_to_json_array(@device.properties) }
       }
     end
@@ -58,9 +58,9 @@ class DevicesController < ApplicationController
   def properties_to_json_array(properties)
     json = {}
     properties.each do |property|
-    json[property.__id__] = {
-      id: property.__id__,
-      value: property.value
+    json[property.id.to_s] = {
+      id: property.id.to_s,
+      value: property.value.to_s
     }
     end
     return json
