@@ -69,6 +69,8 @@
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.14.4, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mongo (v2.14.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mongoid (v7.2.1, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mongoid-multitenancy (v2.0.3, rbenv: 2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mongoid_rails_migrations (v1.4.0, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.4.2, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nio4r (v2.5.7, rbenv: 2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.11.2, rbenv: 2.7.2) [gem]" level="application" />
@@ -223,6 +225,16 @@
             <subtasks>
               <RakeTaskImpl description="Create indexes specified in Mongoid models" fullCommand="db:create_indexes" id="create_indexes" />
               <RakeTaskImpl description="Drops all the collections for the database for the current Rails.env" fullCommand="db:drop" id="drop" />
+              <RakeTaskImpl description="Migrate the database through scripts in db/migrate" fullCommand="db:migrate" id="migrate" />
+              <RakeTaskImpl id="migrate">
+                <subtasks>
+                  <RakeTaskImpl description="Runs the &quot;down&quot; for a given migration VERSION" fullCommand="db:migrate:down" id="down" />
+                  <RakeTaskImpl description="Rollback the database one migration and re migrate up" fullCommand="db:migrate:redo" id="redo" />
+                  <RakeTaskImpl description="Resets your database using your migrations for the current environment" fullCommand="db:migrate:reset" id="reset" />
+                  <RakeTaskImpl description="Display status of migrations" fullCommand="db:migrate:status" id="status" />
+                  <RakeTaskImpl description="Runs the &quot;up&quot; for a given migration VERSION" fullCommand="db:migrate:up" id="up" />
+                </subtasks>
+              </RakeTaskImpl>
               <RakeTaskImpl id="mongoid">
                 <subtasks>
                   <RakeTaskImpl description="Create indexes specified in Mongoid models" fullCommand="db:mongoid:create_indexes" id="create_indexes" />
@@ -236,12 +248,15 @@
               </RakeTaskImpl>
               <RakeTaskImpl description="Drop all collections except the system collections" fullCommand="db:purge" id="purge" />
               <RakeTaskImpl description="Remove indexes specified in Mongoid models" fullCommand="db:remove_indexes" id="remove_indexes" />
+              <RakeTaskImpl description="Delete data and seed" fullCommand="db:reseed" id="reseed" />
               <RakeTaskImpl description="Delete data and loads the seeds" fullCommand="db:reset" id="reset" />
+              <RakeTaskImpl description="Rolls the database back to the previous migration" fullCommand="db:rollback" id="rollback" />
+              <RakeTaskImpl description="Rolls the database back to the specified VERSION" fullCommand="db:rollback_to" id="rollback_to" />
               <RakeTaskImpl description="Load the seed data from db/seeds.rb" fullCommand="db:seed" id="seed" />
               <RakeTaskImpl description="Create the database, and initialize with the seed data" fullCommand="db:setup" id="setup" />
               <RakeTaskImpl description="Shard collections with shard keys specified in Mongoid models" fullCommand="db:shard_collections" id="shard_collections" />
+              <RakeTaskImpl description="Current database version" fullCommand="db:version" id="version" />
               <RakeTaskImpl description="" fullCommand="db:create" id="create" />
-              <RakeTaskImpl description="" fullCommand="db:migrate" id="migrate" />
               <RakeTaskImpl id="schema">
                 <subtasks>
                   <RakeTaskImpl description="" fullCommand="db:schema:load" id="load" />
