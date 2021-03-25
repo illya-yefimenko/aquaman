@@ -1,0 +1,18 @@
+<hr>
+<p>
+  Name: <%= property.name %>
+</p>
+<p>
+  Unit: <%= property.unit %>
+<p>
+  Value Type: <%= property.value_type %>
+<p>
+  IO Direction: <%= property.io_direction %>
+</p>
+<p>
+  Value: <%= property.getValue() %>
+</p>
+
+<div>
+  <%= link_to 'Destroy Property', [property.device, property], method: :delete, data: { confirm: "Are you sure?"} %>
+</div>
