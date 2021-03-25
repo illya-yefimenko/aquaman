@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'historical_values/destroy'
   root "devices#index"
 
   resources :devices do
