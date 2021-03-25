@@ -1,6 +1,15 @@
 class DevicesController < ApplicationController
+
   def show
     @device = Device.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render json: {
+        device_id:@device.id.__id__,
+        properties: properties_to_json_array(@device.properties) }
+      }
+    end
+
   end
 
   def index
@@ -45,5 +54,15 @@ class DevicesController < ApplicationController
   private
   def device_params
     params.require(:device).permit(:name);
+  end
+  def properties_to_json_array(properties)
+    json = {}
+    properties.each do |property|
+    json[property.__id__] = {
+      id: property.__id__,
+      value: property.value
+    }
+    end
+    return json
   end
 end
