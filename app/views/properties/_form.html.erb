@@ -9,11 +9,11 @@
   </p>
   <p>
     <%= form.label :value_type %>
-    <%= form.select :value_type, Property.getValueTypes, selected: Property.getValueTypes[0]  %>
+    <%= form.select :value_type, Property.value_types, selected: Property.value_types[0]  %>
   </p>
   <p>
     <%= form.label :io_direction %>
-    <%= form.select :io_direction, Property.getIODirections, selected: Property.getIODirections[0]  %>
+    <%= form.select :io_direction, Property.io_directions, selected: Property.io_directions[0]  %>
   </p>
   <p>
     <%= form.submit %>

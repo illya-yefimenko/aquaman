@@ -2,6 +2,8 @@ class Property
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  before_save :push_to_historical_values
+
   field :name, type: String
     validates :name, presence: true
   field :unit, type: String
@@ -18,20 +20,25 @@ class Property
   field :value
 
   belongs_to :device
+  has_many :historical_values, dependent: :destroy
 
   public
-  def self.getValueTypes
+  def self.value_types
     VALUE_TYPES
   end
-  def self.getIODirections
+  def self.io_directions
     IO_DIRECTIONS
   end
-  def getValue
+  def get_value
     case :value_type
     when :number
       :value
     when :boolean
       :value ? true : false
     end
+  end
+
+  def push_to_historical_values
+    historical_values.new value: get_value
   end
 end
