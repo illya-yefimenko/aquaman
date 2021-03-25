@@ -12,7 +12,9 @@
 <p>
   Value: <%= property.get_value() %>
 </p>
-
+<div>
+  <%= link_to 'Edit', edit_device_property_path(property.device,property) %>
+</div>
 <div>
   <%= link_to 'Destroy Property', [property.device, property], method: :delete, data: { confirm: "Are you sure?"} %>
 </div>

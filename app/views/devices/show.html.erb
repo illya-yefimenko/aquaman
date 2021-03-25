@@ -5,5 +5,5 @@
 <%= render @device.properties %>
 
 <h2>Add a property</h2>
-<%= render 'properties/form' %>
+<%= render 'properties/form', device: @device, property: @device.properties.build %>
 

@@ -1,4 +1,5 @@
-<%= form_with model: [ @device, @device.properties.build ] do |form| %>
+<%#= form_with model: [ device, device.properties.build ] do |form| %>
+<%= form_with model: [ device, property ] do |form| %>
   <p>
     <%= form.label :name %>
     <%= form.text_field :name %>
