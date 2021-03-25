@@ -22,6 +22,10 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'mongoid', '~> 7.2.1'
 
+gem 'mongoid_rails_migrations'
+
+gem 'mongoid-multitenancy'
+
 gem 'react-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
