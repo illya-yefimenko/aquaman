@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   get 'historical_values/destroy'
   root "devices#index"
 
+  namespace :api do
+    namespace :v1 do
+      resources :devices, only: [:show]
+      resources :properties, only: [:update]
+    end
+  end
+
   resources :devices do
     resources :properties
   end
