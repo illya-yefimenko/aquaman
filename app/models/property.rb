@@ -18,9 +18,10 @@ class Property
     validates :io_direction, inclusion: { in: IO_DIRECTIONS }
 
   field :value
+    validate :validate_value_match_type
 
   belongs_to :device
-  has_many :historical_values, dependent: :destroy
+    has_many :historical_values, dependent: :destroy
 
   public
   def self.value_types
@@ -29,16 +30,20 @@ class Property
   def self.io_directions
     IO_DIRECTIONS
   end
-  def get_value
-    case :value_type
+
+  def push_to_historical_values
+    historical_values.create value: value
+  end
+
+  def validate_value_match_type
+    case value_type
     when :number
-      :value
+      errors.add :value, "is not a number" unless value.is_a? Numeric
     when :boolean
-      :value ? true : false
+      errors.add :value, "is not a boolean" unless value.is_a? Boolean
+    else
+      fail "Unknown type"
     end
   end
 
-  def push_to_historical_values
-    historical_values.new value: get_value
-  end
 end
