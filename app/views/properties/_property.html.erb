@@ -10,8 +10,11 @@
   IO Direction: <%= property.io_direction %>
 </p>
 <p>
-  Value: <%= property.get_value() %>
+  Value: <%= property.value %>
 </p>
+<div>
+  <%= line_chart property.historical_values.order(created_at: :desc).limit(10).collect{|i| [i[:created_at], i[:value]]} %>
+</div>
 <div>
   <%= link_to 'Edit', edit_device_property_path(property.device,property) %>
 </div>

@@ -31,6 +31,10 @@ class Property
     IO_DIRECTIONS
   end
 
+  def get_last_historical_values(count)
+    historical_values.slice(historical_values.count - count)
+  end
+
   def push_to_historical_values
     historical_values.create value: value
   end
