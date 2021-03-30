@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'projects/home'
+  devise_for :users
   get 'historical_values/destroy'
   root "devices#index"
 
