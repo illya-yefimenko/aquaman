@@ -16,6 +16,10 @@ class User
   ## Rememberable
   field :remember_created_at, type: Time
 
+  field :admin, type: Boolean, default: false
+
+  has_many :projects, dependent: :destroy
+
   ## Trackable
   # field :sign_in_count,      type: Integer, default: 0
   # field :current_sign_in_at, type: Time
@@ -34,4 +38,8 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
   include Mongoid::Timestamps
+
+  def admin?
+    admin
+  end
 end

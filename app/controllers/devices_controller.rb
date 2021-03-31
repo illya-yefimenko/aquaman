@@ -1,5 +1,8 @@
 class DevicesController < ApplicationController
 
+  before_action :set_create_project, only: [:new, :create]
+  before_action :set_project, only: [:show]
+
   def show
     @device = Device.find(params[:id])
   end
@@ -13,7 +16,8 @@ class DevicesController < ApplicationController
   end
 
   def create
-    @device = Device.new(device_params)
+    authorize @project, :create_device?
+    @device = @project.devices.new(device_params)
 
     if @device.save
       redirect_to @device
@@ -44,7 +48,17 @@ class DevicesController < ApplicationController
 
 
   private
+
   def device_params
     params.require(:device).permit(:name);
   end
-end
+
+  def set_create_project
+    @project = Project.find params[:project_id]
+  end
+  def set_project
+    @project = Device.find(params[:id]).project
+  end
+
+
+  end

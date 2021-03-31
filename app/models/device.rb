@@ -6,4 +6,5 @@ class Device
     validates :name, presence: true
 
   has_many :properties, dependent: :destroy
+  belongs_to :project
 end

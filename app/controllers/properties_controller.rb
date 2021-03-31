@@ -1,19 +1,18 @@
 class PropertiesController < ApplicationController
   def create
     @device = find_device(params[:device_id])
+    authorize @device, :create_property?
     @property = @device.properties.create(property_params)
     redirect_to device_path(@device)
   end
 
   def edit
-    #@device = Device.find(params[:device_id])
-    @device = find_device(params[:device_id])
-    @property = find_property @device, params[:id]
+    @property = authorize Property.find(params[:id])
   end
 
   def update
-    @device = find_device params[:device_id]
-    @property = find_property @device, params[:id]
+    @property = authorize Property.find(params[:id])
+    @device = @property.device
     if @property.update(property_params)
       redirect_to device_path @device
     else
@@ -22,8 +21,8 @@ class PropertiesController < ApplicationController
   end
 
   def destroy
-    @device = find_device params[:device_id]
-    @property = find_property @device, params[:id]
+    @property = authorize Property.find(params[:id])
+    @device = @property.device
     @property.destroy
 
     redirect_to device_path @device

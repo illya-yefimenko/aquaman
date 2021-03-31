@@ -32,17 +32,21 @@ class Property
   end
 
   def push_to_historical_values
-    historical_values.create value: value
+    if(created_at && !value.nil?)
+      historical_values.create value: value
+    end
   end
 
   def validate_value_match_type
-    case value_type
-    when :number
-      errors.add :value, "is not a number" unless value.is_a? Numeric
-    when :boolean
-      errors.add :value, "is not a boolean" unless value.is_a? Boolean
-    else
-      fail "Unknown type"
+    if(created_at && !value.nil?)
+      case value_type
+      when :number
+        errors.add :value, "is not a number" unless value.is_a? Numeric
+      when :boolean
+        errors.add :value, "is not a boolean" unless value.is_a? Boolean
+      else
+        fail "Unknown type"
+      end
     end
   end
 

@@ -4,11 +4,11 @@
 <ul>
   <% @devices.each do |device| %>
     <li>
-      <a href="<%= device_path(device) %>">
+      <a href="<%= project_device_path(device) %>">
         <%= device.name %>
       </a>
     </li>
   <% end %>
 </ul>
 
-<%= link_to "New Device", new_device_path %>
+<%= link_to "New Device", new_project_device_path(@project.id) %>

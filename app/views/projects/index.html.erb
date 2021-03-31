@@ -1,0 +1,14 @@
+<h1>Projects#home</h1>
+<p>Find me in app/views/projects/home.html.erb</p>
+
+<ul>
+  <% @projects.each do |project| %>
+    <li>
+      <a href="<%= project_path(project) %>">
+        <%= project.name %>
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "New Project", new_project_path %>

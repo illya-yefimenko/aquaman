@@ -1,22 +1,24 @@
 <%#= form_with model: [ device, device.properties.build ] do |form| %>
 <%= form_with model: [ device, property ] do |form| %>
-  <p>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </p>
-  <p>
-    <%= form.label :unit %>
-    <%= form.text_field :unit %>
-  </p>
-  <p>
-    <%= form.label :value_type %>
-    <%= form.select :value_type, Property.value_types, selected: Property.value_types[0]  %>
-  </p>
-  <p>
-    <%= form.label :io_direction %>
-    <%= form.select :io_direction, Property.io_directions, selected: Property.io_directions[0]  %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
+  <div>
+    <p>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </p>
+    <p>
+      <%= form.label :unit %>
+      <%= form.text_field :unit %>
+    </p>
+    <p>
+      <%= form.label :value_type %>
+      <%= form.select :value_type, Property.value_types, selected: Property.value_types[0]  %>
+    </p>
+    <p>
+      <%= form.label :io_direction %>
+      <%= form.select :io_direction, Property.io_directions, selected: Property.io_directions[0]  %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+  </div>
 <% end %>

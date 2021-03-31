@@ -1,9 +1,9 @@
-<div><%= link_to "All Devices", devices_path %></div>
+<div><%= link_to "All Devices", project_path(@project.id) %></div>
 <h1><%= @device.name %></h1>
 
 <h2>Properties</h2>
 <%= render @device.properties %>
 
 <h2>Add a property</h2>
-<%= render 'properties/form', device: @device, property: @device.properties.build %>
+<%= render 'properties/form', device: @device, property: @device.properties.build%>
 

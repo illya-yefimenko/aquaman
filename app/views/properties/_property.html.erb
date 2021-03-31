@@ -1,23 +1,25 @@
 <hr>
-<p>
-  Name: <%= property.name %>
-</p>
-<p>
-  Unit: <%= property.unit %>
-<p>
-  Value Type: <%= property.value_type %>
-<p>
-  IO Direction: <%= property.io_direction %>
-</p>
-<p>
-  Value: <%= property.value %>
-</p>
 <div>
-  <%= line_chart property.historical_values.order(created_at: :desc).limit(10).collect{|i| [i[:created_at], i[:value]]} %>
-</div>
-<div>
-  <%= link_to 'Edit', edit_device_property_path(property.device,property) %>
-</div>
-<div>
-  <%= link_to 'Destroy Property', [property.device, property], method: :delete, data: { confirm: "Are you sure?"} %>
+  <p>
+    Name: <%= property.name %>
+  </p>
+  <p>
+    Unit: <%= property.unit %>
+  <p>
+    Value Type: <%= property.value_type %>
+  <p>
+    IO Direction: <%= property.io_direction %>
+  </p>
+  <p>
+    Value: <%= property.value %>
+  </p>
+  <div>
+    <%= line_chart property.historical_values.order(created_at: :desc).limit(10).collect{|i| [i[:created_at], i[:value]]} %>
+  </div>
+  <div>
+    <%= link_to 'Edit', edit_property_path(property) %>
+  </div>
+  <div>
+    <%= link_to 'Destroy Property', property, method: :delete, data: { confirm: "Are you sure?"} %>
+  </div>
 </div>

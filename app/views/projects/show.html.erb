@@ -1,0 +1,19 @@
+<div><%= link_to "All Projects", projects_path %></div>
+<h1><%= @project.name %></h1>
+
+<div><%= link_to 'Destroy Project', @project, method: :delete, data: { confirm: "are you sure?"} %></div>
+
+<h2>Devices</h2>
+<ul>
+  <% @project.devices.each do |device| %>
+    <li>
+      <a href="<%= device_path(device) %>">
+        <%= device.name %>
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Add a Device</h2>
+<%= link_to 'New Device', new_project_device_path(@project.id) %>
+
