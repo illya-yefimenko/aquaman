@@ -4,17 +4,32 @@
     Name: <%= property.name %>
   </p>
   <p>
-    Unit: <%= property.unit %>
-  <p>
     Value Type: <%= property.value_type %>
+  </p>
   <p>
     IO Direction: <%= property.io_direction %>
   </p>
   <p>
-    Value: <%= property.value %>
+    <% if property.show_graph? %>
+      Value: <%= property.value %> <%= property.unit %>
+    <% else %>
+      <%= form_with model: property do |form| %>
+        <div>
+          <p>
+            <%= form.label :value %>
+            <%= form.number_field :value %> <%= property.unit %>
+          </p>
+          <p>
+            <%= form.submit %>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
   </p>
   <div>
-    <%= line_chart property.historical_values.order(created_at: :desc).limit(10).collect{|i| [i[:created_at], i[:value]]} %>
+    <% if property.show_graph? %>
+      <%=line_chart property.historical_values.order(created_at: :desc).limit(500).collect{|i| [i[:created_at], i[:value]]}%>
+    <% end %>
   </div>
   <div>
     <%= link_to 'Edit', edit_property_path(property) %>
