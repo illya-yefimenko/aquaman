@@ -14,7 +14,7 @@ class Property
     validates :value_type, inclusion: { in: VALUE_TYPES }
 
   field :io_direction, type: StringifiedSymbol
-    IO_DIRECTIONS = [:input, :output]
+    IO_DIRECTIONS = [:input, :output, :variable]
     validates :io_direction, inclusion: { in: IO_DIRECTIONS }
 
   field :value
@@ -37,13 +37,17 @@ class Property
     end
   end
 
+  def show_graph?
+    io_direction != :variable
+  end
+
   def validate_value_match_type
     if(created_at && !value.nil?)
       case value_type
       when :number
         errors.add :value, "is not a number" unless value.is_a? Numeric
       when :boolean
-        errors.add :value, "is not a boolean" unless value.is_a? Boolean
+        errors.add :value, "is not a boolean" unless value.is_a? Numeric
       else
         fail "Unknown type"
       end
