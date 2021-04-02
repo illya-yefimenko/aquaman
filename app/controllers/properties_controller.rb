@@ -1,4 +1,7 @@
 class PropertiesController < ApplicationController
+
+  before_action :fix_types, only: [:update]
+
   def create
     @device = find_device(params[:device_id])
     authorize @device, :create_property?
@@ -30,7 +33,7 @@ class PropertiesController < ApplicationController
 
   private
   def property_params
-    params.require(:property).permit(:name, :unit, :value_type, :io_direction)
+    params.require(:property).permit(:name, :unit, :value_type, :io_direction, :value)
   end
   def find_property(device, property_id)
     find_entity(device.properties, property_id)
@@ -40,5 +43,13 @@ class PropertiesController < ApplicationController
   end
   def find_entity(entity, id)
     entity.find(id)
+  end
+  def fix_types
+    if params[:property][:value]
+      params[:property][:value] = params[:property][:value].to_i
+    end
+  end
+  def is_i?(item)
+    !!(item =~ /\A[-+]?[0-9]+\z/)
   end
 end
