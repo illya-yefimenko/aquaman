@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :devices, only: [:show]
-      resources :properties, only: [:update]
+      resources :properties, only: [:update, :show] do
+        post 'set', to: 'properties#update'
+      end
     end
   end
   resources :projects do
